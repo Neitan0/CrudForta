@@ -1,103 +1,66 @@
-import Image from "next/image";
+'use client';
+import { useEffect, useState } from 'react';
+import { Veiculo } from '@prisma/client';
+import VeiculoDetalhes from '@/components/VeiculoDetalhes';
+import FormularioVeiculo from '@/components/FormularioVeiculo';
 
-export default function Home() {
+export default function Page() {
+  const [veiculos, setVeiculos] = useState<Veiculo[]>([]);
+  const [veiculoSelecionado, setVeiculoSelecionado] = useState<Veiculo | null>(null);
+
+  async function carregarVeiculos() {
+    const res = await fetch('/api/veiculos');
+    const dados = await res.json();
+    setVeiculos(dados);
+  }
+
+  useEffect(() => { carregarVeiculos(); }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col md:flex-row">
+      <aside className="w-full md:w-80 bg-white border-r border-gray-200 p-6">
+        <h1 className="text-xl font-bold text-gray-900 mb-8">Frota</h1>
+        <FormularioVeiculo onSuccess={carregarVeiculos} veiculoId={''} />
+      </aside>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <main className="flex-1 p-6 md:p-10 overflow-y-auto">
+        {/* SEÇÃO DE DETALHES (Aparece no topo se houver seleção) */}
+        {veiculoSelecionado && (
+          <section className="mb-10 animate-in slide-in-from-top duration-500">
+            <VeiculoDetalhes 
+              veiculo={veiculoSelecionado} 
+              onClose={() => setVeiculoSelecionado(null)} 
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </section>
+        )}
+
+        <header className="mb-6">
+          <h2 className="text-sm font-medium text-gray-500 uppercase tracking-wider">Veículos</h2>
+          <p className="text-2xl font-semibold text-gray-800">{veiculos.length} Unidades</p>
+        </header>
+
+        {/* GRID DE CARDS MINIMALISTAS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
+          {veiculos.map((v) => (
+            <div 
+              key={v.id} 
+              onClick={() => setVeiculoSelecionado(v)}
+              className={`p-4 rounded-xl border cursor-pointer transition-all hover:border-blue-400 bg-white ${
+                veiculoSelecionado?.id === v.id ? 'ring-2 ring-blue-500 border-transparent' : 'border-gray-200'
+              }`}
+            >
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase">
+                  {v.placa}
+                </span>
+                <span className="text-[10px] text-gray-400">{v.ano}</span>
+              </div>
+              <h3 className="text-gray-900 font-medium">{v.modelo}</h3>
+              <p className="text-gray-500 text-xs">{v.marca}</p>
+            </div>
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
