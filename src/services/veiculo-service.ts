@@ -14,12 +14,19 @@ export class VeiculoService {
     if (existe) {
       throw new Error("Já existe um veículo cadastrado com esta placa.");
     }
-
     const dadosFormatados = {
       ...dados,
       placa: dados.placa.toUpperCase()
     };
-
     return await this.veiculoRepo.create(dadosFormatados);
+  }
+
+  async update(id: string, dados: Partial<Veiculo>): Promise<Veiculo> {
+    const updated = await this.veiculoRepo.update(id, dados);
+    return updated;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.veiculoRepo.delete(id);
   }
 }

@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { ManutencaoRepositoryPrisma } from "@/repositories/ManutencaoRepository";
-import { ManutencaoService } from "@/services/ManutencaoService";
+import { ServiceFactory } from "@/lib/factory";
 
-const repo = new ManutencaoRepositoryPrisma();
-const service = new ManutencaoService(repo);
+const service = ServiceFactory.getManutencaoService();
 
 export async function POST(req: Request) {
   try {
@@ -12,5 +10,14 @@ export async function POST(req: Request) {
     return NextResponse.json(resultado, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+}
+
+export async function GET() {
+  try {
+    const dados = await service.findMany();
+    return NextResponse.json(dados);
+  } catch (error) {
+    return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
 }

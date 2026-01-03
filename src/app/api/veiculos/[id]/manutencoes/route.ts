@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
-import { ManutencaoRepositoryPrisma } from "@/repositories/ManutencaoRepository";
-import { ManutencaoService } from "@/services/ManutencaoService";
+import { ServiceFactory } from "@/lib/factory";
 
-const repo = new ManutencaoRepositoryPrisma();
-const service = new ManutencaoService(repo);
+
+const service = ServiceFactory.getManutencaoService();
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
-    // Usando o método que você já definiu no repositório!
-    const manutencoes = await repo.findByVeiculo(params.id);
+    const { id } = await params;
+    const manutencoes = await service.findByVeiculo(id);
     return NextResponse.json(manutencoes);
   } catch (error) {
     return NextResponse.json({ error: "Erro ao buscar manutenções" }, { status: 400 });
