@@ -9,12 +9,11 @@ interface FormManutencaoProps {
 export default function FormularioManutencao({ veiculoId, onSuccess }: FormManutencaoProps) {
   const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
-  const [tipo, setTipo] = useState('Preventiva'); // Valor padrão
+  const [tipo, setTipo] = useState('Preventiva'); 
   const [dataInicial, setDataInicial] = useState('');
 
   async function salvar(e: React.FormEvent) {
     e.preventDefault();
-    
     await fetch('/api/manutencoes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -23,7 +22,7 @@ export default function FormularioManutencao({ veiculoId, onSuccess }: FormManut
         valor: Number(valor), 
         tipo, 
         dataInicial, 
-        veiculoId // <--- O VÍNCULO AQUI
+        veiculoId 
       }),
     });
 

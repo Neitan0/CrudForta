@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { VeiculoRepositoryPrisma } from "@/repositories/veiculo-repository";
-import { VeiculoService } from "@/services/veiculo-service";
+import { ServiceFactory } from "@/lib/factory";
 
-const veiculoRepo = new VeiculoRepositoryPrisma();
-const veiculoService = new VeiculoService(veiculoRepo);
+const veiculoService = ServiceFactory.getVeiculoService();
 
 export async function GET() {
   try {
