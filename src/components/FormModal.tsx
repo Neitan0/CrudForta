@@ -30,7 +30,7 @@ export default function FormModal({ type, onClose, onSuccess }: FormModalProps) 
         
         <div className="p-8">
           {type === 'veiculos' ? (
-            <FormularioVeiculo onSuccess={onSuccess} veiculoId={''} />
+            <FormularioVeiculo onSuccess={onSuccess} />
           ) : (
             <FormularioManutencao 
               veiculoId="" 
