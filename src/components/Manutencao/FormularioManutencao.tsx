@@ -43,7 +43,7 @@ export default function FormularioManutencao({ veiculoId, onSuccess }: FormManut
   const inputStyle = "w-full p-3 bg-white border border-gray-200 rounded-2xl text-sm text-gray-900 placeholder:text-gray-300 focus:ring-4 focus:ring-blue-50 focus:border-blue-500 outline-none transition-all shadow-sm";
 
   return (
-    <form onSubmit={salvar} className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-xl shadow-blue-900/5 max-w-2xl mx-auto">
+    <form onSubmit={salvar} className="bg-white p-8 rounded-4xl border border-gray-100 shadow-xl shadow-blue-900/5 max-w-2xl mx-auto">
       <div className="space-y-6">
         {/* Campo de Descrição */}
         <div>
@@ -57,7 +57,7 @@ export default function FormularioManutencao({ veiculoId, onSuccess }: FormManut
           />
         </div>
 
-        {/* Linha: Valor e Tipo */}
+        {/* Valor e Tipo */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className={labelStyle}>Valor Estimado (R$)</label>
@@ -74,8 +74,6 @@ export default function FormularioManutencao({ veiculoId, onSuccess }: FormManut
             </div>
           </div>
           <div>
-            {/* <label className={labelStyle}>Tipo de Intervenção</label> */}
-            {/* Substitua o campo de Tipo por este bloco no FormularioManutencao.tsx */}
             <div>
               <label className={labelStyle}>Tipo de Intervenção</label>
               <div className="flex p-1 bg-gray-100 rounded-2xl gap-1">

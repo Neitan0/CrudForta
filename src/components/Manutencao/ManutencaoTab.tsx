@@ -19,7 +19,7 @@ export default function ManutencoesTab({ manutencoes, onDelete, onUpdate }: Manu
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       
-      {/* Cabeçalho Minimalista */}
+      {/* Cabeçalho */}
       <div className="flex items-center gap-4">
         <h3 className="text-xl font-bold text-gray-900">Registros de Manutenção</h3>
         <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-black">

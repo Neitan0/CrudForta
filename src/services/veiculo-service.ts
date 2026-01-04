@@ -1,4 +1,4 @@
-import { Veiculo } from "@prisma/client"; // Importe o tipo aqui!
+import { Veiculo } from "@prisma/client"; 
 import { IVeiculoCrudProtocol } from "../app/interfaces/IVeiculoCrudProtocol";
 
 export class VeiculoService {

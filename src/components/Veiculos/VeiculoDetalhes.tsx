@@ -142,7 +142,7 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
         </div>
       </div>
 
-      {/* Container do Histórico com altura limitada */}
+      {/* Container do Histórico */}
       <div className="p-10 bg-[#F8FAFC] rounded-b-[48px]">
         <div className="flex justify-between items-center mb-8">
           <h3 className="text-2xl font-black text-gray-900">Histórico</h3>
