@@ -2,11 +2,10 @@
 import { useState } from 'react';
 
 interface FormManutencaoProps {
-  veiculoId: string;
   onSuccess?: () => void;
 }
 
-export default function FormularioVeiculo({ veiculoId, onSuccess }: FormManutencaoProps) {
+export default function FormularioVeiculo({ onSuccess }: FormManutencaoProps) {
   const [placa, setPlaca] = useState('');
   const [modelo, setModelo] = useState('');
   const [marca, setMarca] = useState('');

@@ -4,15 +4,27 @@ import { Veiculo } from "@prisma/client";
 
 
 export class VeiculoRepositoryPrisma implements IVeiculoCrudProtocol {
-  delete(id: string): Promise<Veiculo> {
-      throw new Error("Method not implemented.");
+
+  async update(id: string, data: Partial<Omit<Veiculo, "id">>): Promise<Veiculo> {
+    return await prisma.veiculo.update({
+      where: { id },
+      data
+    });
   }
-  async create(data: any) {
+  async delete(id: string): Promise<void> {
+     await prisma.veiculo.delete({
+      where: { id }
+    });
+  }
+
+  async create(data: Veiculo) {
     return await prisma.veiculo.create({ data });
   }
 
   async findAll() {
-    return await prisma.veiculo.findMany();
+    return await prisma.veiculo.findMany({
+      orderBy: { createdAt: "desc" }
+    });
   }
 
   async findByPlaca(placa: string) {
