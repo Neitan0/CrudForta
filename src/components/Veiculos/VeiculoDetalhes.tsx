@@ -50,17 +50,17 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
   }
 
   async function handleUpdateManutencao(id: string, dados: any) {
-  const res = await fetch(`/api/manutencoes/${id}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados)
-  });
-  
-  if (res.ok) {
-    buscarManutencoes(); // Recarrega a lista local do veículo
-    onRefresh();        // Recarrega os dados do Dashboard (contadores, etc)
+    const res = await fetch(`/api/manutencoes/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
+
+    if (res.ok) {
+      buscarManutencoes(); // Recarrega a lista local do veículo
+      onRefresh();        // Recarrega os dados do Dashboard (contadores, etc)
+    }
   }
-}
 
   return (
     <div className="bg-white rounded-[40px] shadow-2xl border border-gray-100 overflow-hidden max-w-5xl w-full mx-auto">
@@ -142,24 +142,29 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
         </div>
       </div>
 
-{/* HISTÓRICO DE MANUTENÇÕES REUTILIZANDO O COMPONENTE */}
-<div className="p-10 bg-[#F8FAFC]">
-  <h3 className="text-2xl font-black text-gray-900 mb-8">Histórico</h3>
-  <div className="space-y-4">
-    {manutencoes.length === 0 ? (
-      <p className="text-gray-400">Nenhum registro encontrado.</p>
-    ) : (
-      manutencoes.map((m: any) => (
-        <ManutencaoCard 
-          key={m.id} 
-          manutencao={m} 
-          onDelete={handleExcluirManutencao} 
-          onUpdate={handleUpdateManutencao} // 👈 Adicione essa função no Detalhes
-        />
-      ))
-    )}
-  </div>
-</div>
+      {/* Container do Histórico com altura limitada */}
+      <div className="p-10 bg-[#F8FAFC] rounded-b-[48px]">
+        <div className="flex justify-between items-center mb-8">
+          <h3 className="text-2xl font-black text-gray-900">Histórico</h3>
+          <span className="text-xs font-bold text-gray-400">{manutencoes.length} registros</span>
+        </div>
+
+        {/* AQUI ESTÁ A CHAVE: max-h e overflow */}
+        <div className="space-y-4 overflow-y-auto pr-2 max-h-[500px] custom-scrollbar">
+          {manutencoes.length === 0 ? (
+            <p className="text-gray-400 italic text-center py-10">Nenhum registro encontrado.</p>
+          ) : (
+            manutencoes.map((m: any) => (
+              <ManutencaoCard
+                key={m.id}
+                manutencao={m}
+                onDelete={handleExcluirManutencao}
+                onUpdate={handleUpdateManutencao}
+              />
+            ))
+          )}
+        </div>
+      </div>
       {/* modal */}
       {showAddManutencao && (
         <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
@@ -179,9 +184,9 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
             <FormularioManutencao
               veiculoId={veiculo.id}
               onSuccess={() => {
-                setShowAddManutencao(false); 
-                buscarManutencoes();       
-                onRefresh();         
+                setShowAddManutencao(false);
+                buscarManutencoes();
+                onRefresh();
               }}
             />
           </div>

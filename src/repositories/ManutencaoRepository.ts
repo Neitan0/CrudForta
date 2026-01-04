@@ -32,7 +32,6 @@ export class ManutencaoRepositoryPrisma implements IManutencaoProtocol {
   }
 
   async update(id: string, data: any): Promise<Manutencao> {
-    // Limpamos o objeto data para não enviar campos extras (como 'veiculo') que o Prisma não aceita no update
     const updateData: any = {};
 
     if (data.descricao) updateData.descricao = data.descricao;

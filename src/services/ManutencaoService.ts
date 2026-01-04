@@ -33,8 +33,21 @@ export class ManutencaoService {
     return await this.repo.findMany();
   }
 
-  async update(id: string, data: Partial<Omit<Manutencao, 'id'>>): Promise<Manutencao> {
-    const updated = await this.repo.update(id, data);
-    return updated;
+async update(id: string, data: Partial<Omit<Manutencao, 'id'>>): Promise<Manutencao> {
+  
+  const tipoBase = data.tipo?.replace(' - custo elevado', '') || '';
+
+  let tipoAtualizado = tipoBase;
+  if (data.valor && data.valor > 5000) {
+    tipoAtualizado = `${tipoBase} - custo elevado`;
+  } else {
+    tipoAtualizado = tipoBase;
   }
+  const updated = await this.repo.update(id, { 
+    ...data, 
+    tipo: tipoAtualizado 
+  });
+  
+  return updated;
+}
 }

@@ -10,7 +10,8 @@ interface Props {
 
 export default function ManutencaoCard({ manutencao, onDelete, onUpdate }: Props) {
   const [isEditing, setIsEditing] = useState(false);
-  
+ 
+
   // Estados para TODOS os campos
   const [descricao, setDescricao] = useState(manutencao.descricao);
   const [valor, setValor] = useState(Number(manutencao.valor));
@@ -30,7 +31,7 @@ export default function ManutencaoCard({ manutencao, onDelete, onUpdate }: Props
   const inputClass = "bg-blue-50 border-b-2 border-blue-500 outline-none font-bold text-gray-700 px-1";
 
   return (
-    <div className={`bg-white p-6 rounded-[32px] border transition-all group ${isEditing ? 'border-blue-500 ring-4 ring-blue-50' : 'border-gray-100 shadow-sm'}`}>
+    <div className={`bg-white p-6 rounded-4xl border transition-all group ${isEditing ? 'border-blue-500 ring-4 ring-blue-50' : 'border-gray-100 shadow-sm'}`}>
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
           {isEditing ? (
