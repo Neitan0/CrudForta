@@ -23,7 +23,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     
     return NextResponse.json(manutencaoAtualizada);
   } catch (error: any) {
-    console.error("ERRO NO PATCH:", error); // Olhe o terminal do VS Code para ver este erro!
+    console.error("ERRO NO PATCH:", error); 
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

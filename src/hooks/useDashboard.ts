@@ -10,7 +10,7 @@ export function useDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // --- FETCH ---
+
   const carregarDados = async () => {
     setLoading(true);
     try {

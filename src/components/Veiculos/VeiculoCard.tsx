@@ -33,7 +33,7 @@ export default function VeiculoCard({ veiculo, isSelected, onClick }: VeiculoCar
       </h3>
       <p className="text-gray-500 font-medium">{veiculo.marca}</p>
       
-      {/* Indicador visual de seleção (estilo iOS) */}
+      {/* Indicador visual de seleção */}
       {isSelected && (
         <div className="mt-4 pt-4 border-t border-blue-50 flex items-center justify-between text-blue-600">
           <span className="text-[10px] font-bold uppercase tracking-tighter">Editando detalhes</span>

@@ -6,11 +6,11 @@ import VeiculoDetalhes from './Veiculos/VeiculoDetalhes';
 import FormModal from './FormModal';
 
 export default function Dashboard() {
-  const vm = useDashboard(); // VM = ViewModel
+  const vm = useDashboard(); 
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex">
-      {/* SIDEBAR - Componente fixo */}
+      {/* SIDEBAR */}
       <aside className="w-72 bg-[#0F172A] p-8 fixed h-full">
         <h1 className="text-blue-500 font-black text-2xl mb-10">JB FROTA</h1>
         <nav className="space-y-4">
@@ -30,7 +30,6 @@ export default function Dashboard() {
         <header className="flex justify-between mb-10">
           <h2 className="text-4xl font-black capitalize text-black">{vm.activeTab}</h2>
 
-          {/* Só renderiza o botão se a aba ativa for exatamente 'veiculos' */}
           {vm.activeTab === 'veiculos' && (
             <button
               onClick={() => vm.setIsModalOpen(true)}
