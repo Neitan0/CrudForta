@@ -2,8 +2,15 @@
 import { useState, useEffect, useCallback } from "react";
 import FormularioManutencao from '../Manutencao/FormularioManutencao';
 import ManutencaoCard from '../Manutencao/ManutencaoCard';
+import { Veiculo , Manutencao} from '@prisma/client';
 
-export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
+interface VeiculoDetalhesProps {
+  veiculo: Veiculo;
+  onClose: () => void;
+  onRefresh: () => void;
+}
+
+export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: VeiculoDetalhesProps) {
   const [manutencoes, setManutencoes] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [showAddManutencao, setShowAddManutencao] = useState(false);
@@ -51,7 +58,7 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
     buscarManutencoes();
   }
 
-  async function handleUpdateManutencao(id: string, dados: any) {
+  async function handleUpdateManutencao(id: string, dados: Partial<Manutencao>) {
     const res = await fetch(`/api/manutencoes/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -87,7 +94,7 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-bold text-gray-500 uppercase">Ano</span>
-                    <input className="bg-white/10 border border-white/20 rounded-xl p-3 outline-none focus:border-blue-500 text-base" value={ano} onChange={e => setAno(e.target.value)} />
+                    <input className="bg-white/10 border border-white/20 rounded-xl p-3 outline-none focus:border-blue-500 text-base" value={ano} onChange={e => setAno(Number(e.target.value))} />
                   </div>
                 </div>
               ) : (
@@ -140,7 +147,7 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
               <p className="text-gray-400 italic">Nenhum registro encontrado.</p>
             </div>
           ) : (
-            manutencoes.map((m: any) => (
+            manutencoes.map((m: Manutencao) => (
               <ManutencaoCard
                 key={m.id}
                 manutencao={m}

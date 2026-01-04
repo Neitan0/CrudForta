@@ -27,7 +27,7 @@ export function useDashboard() {
 
   useEffect(() => { carregarDados(); }, []);
 
-  const EditVeiculo = async (id: string, dados: any) => {
+  const EditVeiculo = async (id: string, dados: Veiculo) => {
     const res = await fetch(`/api/veiculos/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(dados)
@@ -49,7 +49,7 @@ export function useDashboard() {
     carregarDados();
   };
 
- const UpdateManutencao = async (id: string, dados: any) => {
+ const UpdateManutencao = async (id: string, dados: Partial<Manutencao>) => {
   const res = await fetch(`/api/manutencoes/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' }, 

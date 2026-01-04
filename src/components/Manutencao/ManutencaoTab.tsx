@@ -1,11 +1,12 @@
 'use client';
 import { useMemo } from 'react';
 import ManutencaoCard from './ManutencaoCard';
+import { Manutencao } from "@prisma/client";
 
 interface ManutencoesTabProps {
-  manutencoes: any[];
+  manutencoes: Manutencao[];
   onDelete: (id: string) => void;
-  onUpdate: (id: string, data: any) => void;
+  onUpdate: (id: string, data: Partial<Manutencao>) => void;
 }
 
 export default function ManutencoesTab({ manutencoes, onDelete, onUpdate }: ManutencoesTabProps) {
@@ -30,7 +31,7 @@ export default function ManutencoesTab({ manutencoes, onDelete, onUpdate }: Manu
       {/* Grid de Manutenções */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {ordenadas.length > 0 ? (
-          ordenadas.map((m: any) => (
+          ordenadas.map((m: Manutencao) => (
             <ManutencaoCard key={m.id} manutencao={m} onDelete={onDelete} onUpdate={onUpdate} />
           ))
         ) : (

@@ -5,7 +5,7 @@ import { Manutencao, Veiculo } from "@prisma/client";
 interface Props {
   manutencao: Manutencao & { veiculo?: Veiculo };
   onDelete: (id: string) => void;
-  onUpdate: (id: string, dados: any) => void;
+  onUpdate: (id: string, dados: Partial<Manutencao>) => void;
 }
 
 export default function ManutencaoCard({ manutencao, onDelete, onUpdate }: Props) {

@@ -31,8 +31,8 @@ export class ManutencaoRepositoryPrisma implements IManutencaoProtocol {
     });
   }
 
-  async update(id: string, data: any): Promise<Manutencao> {
-    const updateData: any = {};
+  async update(id: string, data: Partial<Manutencao>): Promise<Manutencao> {
+    const updateData: Partial<Manutencao> = {};
 
     if (data.descricao) updateData.descricao = data.descricao;
     if (data.valor) updateData.valor = Number(data.valor);
