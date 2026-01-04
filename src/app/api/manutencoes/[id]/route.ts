@@ -3,11 +3,14 @@ import { ServiceFactory } from "@/lib/factory";
 
 const manutencaoService = ServiceFactory.getManutencaoService();
 
-export async function DELETE(req: Request, { params }: any) {
-  const { id } = await params;
-  
-  await manutencaoService.delete(id);
-  return NextResponse.json({ ok: true });
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+    await manutencaoService.delete(id);
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Erro ao deletar" }, { status: 400 });
+  }
 }
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
