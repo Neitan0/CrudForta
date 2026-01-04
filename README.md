@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚚 Gestão de Frota - Desafio Técnico Grupo JB
 
-## Getting Started
+Sistema Full Stack para gerenciamento de veículos e registros de manutenção
 
-First, run the development server:
+## 🚀 Sobre o Projeto
+Esta aplicação foi construída para atender aos requisitos de gestão de frotas, permitindo o controle de veículos e seus históricos de manutenção.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏗️ Diferenciais de Engenharia
+Como desenvolvedor vindo do ecossistema **Swift (iOS)**, apliquei padrões de desenvolvimento robustos para garantir a qualidade deste projeto Next.js:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Multi-Schema PostgreSQL:** Implementação de namespaces no banco de dados através do Prisma (`@@schema("Frota")`), atendendo rigorosamente à organização de banco solicitada.
+- **Service Layer Pattern:** A lógica de negócio (como a regra de custo elevado) foi isolada em uma camada de serviço, garantindo um código limpo e fácil de manter.
+- **TypeScript Strict:** Uso integral de interfaces e tipos gerados pelo Prisma.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Regras de Negócio Implementadas
+- [x] **Regra dos R$ 5.000,00:** O sistema automatiza a identificação de manutenções de alto valor, concatenando `" - custo elevado"` ao campo **Tipo** diretamente no banco de dados.
+- [x] **Data Final Opcional:** Flexibilidade para registros de manutenção em aberto ou finalizados.
+- [x] **UX Responsiva:** Interface otimizada com limites de altura e scroll customizado para grandes volumes de dados.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tecnologias Utilizadas
+- **Framework:** Next.js 15 (App Router)
+- **ORM:** Prisma
+- **Banco de Dados:** PostgreSQL (Supabase)
+- **Estilização:** Tailwind CSS
 
-## Learn More
+## 🔧 Configuração Local
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone e instale as dependências:**
+   ```bash
+   git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+   npm install
