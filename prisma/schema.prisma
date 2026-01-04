@@ -6,10 +6,12 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
+  schemas  = ["Frota"]
 }
 
 model Veiculo {
@@ -20,6 +22,7 @@ model Veiculo {
   ano         Int
   createdAt   DateTime     @default(now())
   manutencoes Manutencao[]
+  @@schema("Frota")
 }
 
 model Manutencao {
@@ -31,4 +34,5 @@ model Manutencao {
   tipo         String
   veiculoId    String
   veiculo      Veiculo  @relation(fields: [veiculoId], references: [id], onDelete: Cascade)
+  @@schema("Frota")
 }

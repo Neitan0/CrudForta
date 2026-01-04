@@ -2,6 +2,9 @@
 // npm install --save-dev prisma dotenv
 
 import { defineConfig } from '@prisma/config'
+import * as dotenv from 'dotenv'
+
+dotenv.config() 
 
 export default defineConfig({
   datasource: {
