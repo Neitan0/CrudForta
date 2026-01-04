@@ -9,7 +9,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     const { id } = await params;
     const manutencoes = await service.findByVeiculo(id);
     return NextResponse.json(manutencoes);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Erro ao buscar manutenções" }, { status: 400 });
   }
 }

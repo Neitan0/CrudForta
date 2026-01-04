@@ -15,15 +15,12 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     const { id } = await params;
     const body = await req.json();
 
-    // 3. Valide se o ID existe
     if (!id) return NextResponse.json({ error: "ID não fornecido" }, { status: 400 });
 
-    // 4. Chame o service
     const manutencaoAtualizada = await manutencaoService.update(id, body);
     
     return NextResponse.json(manutencaoAtualizada);
-  } catch (error: any) {
-    console.error("ERRO NO PATCH:", error); 
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  } catch {
+    return NextResponse.json({ error: "Erro ao atualizar manutenção" }, { status: 400 });
   }
 }
