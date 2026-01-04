@@ -8,7 +8,7 @@ Esta aplicação foi construída para atender aos requisitos de gestão de frota
 ## 🏗️ Diferenciais de Engenharia
 Como desenvolvedor vindo do ecossistema **Swift (iOS)**, apliquei padrões de desenvolvimento robustos para garantir a qualidade deste projeto Next.js:
 
-- **Multi-Schema PostgreSQL:** Implementação de namespaces no banco de dados através do Prisma (`@@schema("Frota")`), atendendo rigorosamente à organização de banco solicitada.
+- **Multi-Schema PostgreSQL:** Implementação de namespaces no banco de dados através do Prisma (`@@schema("Frota")`).
 - **Service Layer Pattern:** A lógica de negócio (como a regra de custo elevado) foi isolada em uma camada de serviço, garantindo um código limpo e fácil de manter.
 - **TypeScript Strict:** Uso integral de interfaces e tipos gerados pelo Prisma.
 
@@ -29,3 +29,19 @@ Como desenvolvedor vindo do ecossistema **Swift (iOS)**, apliquei padrões de de
    ```bash
    git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
    npm install
+
+
+2.**Variáveis de Ambiente:** Crie um arquivo .env na raiz do projeto baseado no .env.example:
+
+DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.begdndmqfeizgqeielkc.supabase.co:5432/postgres?schema=Frota"
+
+3. **Migração do Banco de Dados:**
+   
+   npx prisma migrate dev
+
+   npx prisma generate
+
+5. **Rode o projeto:**
+   
+   npm run dev
+   
