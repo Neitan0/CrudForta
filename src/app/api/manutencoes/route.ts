@@ -8,8 +8,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const resultado = await service.registrar(body);
     return NextResponse.json(resultado, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  } catch {
+    return NextResponse.json({ error: "erro no post manutencao" }, { status: 400 });
   }
 }
 
@@ -17,7 +17,7 @@ export async function GET() {
   try {
     const dados = await service.findMany();
     return NextResponse.json(dados);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Erro interno" }, { status: 500 });
   }
 }

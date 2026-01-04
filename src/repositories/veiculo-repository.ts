@@ -17,7 +17,7 @@ export class VeiculoRepositoryPrisma implements IVeiculoCrudProtocol {
     });
   }
 
-  async create(data: any) {
+  async create(data: Veiculo) {
     return await prisma.veiculo.create({ data });
   }
 

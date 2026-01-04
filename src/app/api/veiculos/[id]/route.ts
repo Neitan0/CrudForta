@@ -11,7 +11,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     const veiculo = await service.update(id, body);
     
     return NextResponse.json(veiculo);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Erro ao atualizar veículo" }, { status: 400 });
   }
 }
@@ -22,7 +22,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     await service.delete(id);
     
     return NextResponse.json({ message: "Veículo excluído com sucesso" });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Erro ao excluir" }, { status: 400 });
   }
 }
