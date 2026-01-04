@@ -27,21 +27,21 @@ Como desenvolvedor vindo do ecossistema **Swift (iOS)**, apliquei padrões de de
 
 1. **Clone e instale as dependências:**
    ```bash
-   git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+   git clone https://github.com/Neitan0/CrudForta.git
+   
    npm install
-
-
+   
 2.**Variáveis de Ambiente:** Crie um arquivo .env na raiz do projeto baseado no .env.example:
 
-DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.begdndmqfeizgqeielkc.supabase.co:5432/postgres?schema=Frota"
+`DATABASE_URL="postgresql://USUARIO:SENHA@HOST:PORTA/DATABASE?schema=Frota"`
 
 3. **Migração do Banco de Dados:**
    
-   npx prisma migrate dev
+   `npx prisma migrate dev`
 
-   npx prisma generate
+   `npx prisma generate`
 
 5. **Rode o projeto:**
    
-   npm run dev
+   `npm run dev`
    
