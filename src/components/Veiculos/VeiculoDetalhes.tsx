@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FormularioManutencao from '../Manutencao/FormularioManutencao';
 import ManutencaoCard from '../Manutencao/ManutencaoCard';
 
@@ -13,15 +13,20 @@ export default function VeiculoDetalhes({ veiculo, onClose, onRefresh }: any) {
   const [marca, setMarca] = useState(veiculo.marca);
   const [ano, setAno] = useState(veiculo.ano);
 
-  async function buscarManutencoes() {
-    const res = await fetch(`/api/veiculos/${veiculo.id}/manutencoes`);
-    const dados = await res.json();
-    setManutencoes(dados);
-  }
+  const buscarManutencoes = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/veiculos/${veiculo.id}/manutencoes`);
+      const dados = await res.json();
+      setManutencoes(dados);
+    } catch (error) {
+      console.error("Erro ao buscar manutenções", error);
+    }
+  }, [veiculo.id]);
+  
 
   useEffect(() => {
     buscarManutencoes();
-  }, [veiculo.id]);
+  }, [buscarManutencoes]);
 
   async function handleSalvar() {
     await fetch(`/api/veiculos/${veiculo.id}`, {
