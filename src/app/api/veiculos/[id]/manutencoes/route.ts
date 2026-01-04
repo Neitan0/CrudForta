@@ -4,9 +4,10 @@ import { ServiceFactory } from "@/lib/factory";
 
 const service = ServiceFactory.getManutencaoService();
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
+    
     const manutencoes = await service.findByVeiculo(id);
     return NextResponse.json(manutencoes);
   } catch {
