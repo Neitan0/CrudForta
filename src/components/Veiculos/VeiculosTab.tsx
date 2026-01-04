@@ -1,9 +1,9 @@
 'use client';
 import VeiculoCard from './VeiculoCard';
-
+import { Veiculo } from "@prisma/client";
 interface Props {
-  veiculos: any[];
-  onSelect: (veiculo: any) => void;
+  veiculos: Veiculo[];
+  onSelect: (veiculo: Veiculo) => void;
 }
 
 export default function VeiculosTab({ veiculos, onSelect }: Props) {
